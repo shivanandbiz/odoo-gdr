@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Populate the "Statement Reports" section with links to existing
+        Balance Sheet, P&L reports, and add new Cash Flow / Executive Summary.
+        Uses the standard Odoo XML ID: account.account_reports_legal_statements_menu (id=159)
+    -->
+
+    <!-- Statement Reports: Cash Flow Statement -->
+    <menuitem id="menu_cash_flow_statement"
+              name="Cash Flow Statement"
+              parent="account.account_reports_legal_statements_menu"
+              action="action_cash_flow_wizard"
+              sequence="1"/>
+
+    <!-- Statement Reports: Executive Summary -->
+    <menuitem id="menu_executive_summary"
+              name="Executive Summary"
+              parent="account.account_reports_legal_statements_menu"
+              action="action_executive_summary_wizard"
+              sequence="4"/>
+
+    <!--
+        Management section: Add missing reports.
+        Uses: account.account_reports_management_menu (id=156)
+        Existing: Invoice Analysis (seq 1), Analytic Report (seq 10), Budgets (seq 20), Assets (seq 21)
+    -->
+
+    <!-- Management: Depreciation Schedule -->
+    <menuitem id="menu_depreciation_schedule"
+              name="Depreciation Schedule"
+              parent="account.account_reports_management_menu"
+              action="action_depreciation_schedule_wizard"
+              sequence="22"/>
+
+    <!-- Management: Deferred Revenue -->
+    <menuitem id="menu_deferred_revenue"
+              name="Deferred Revenue"
+              parent="account.account_reports_management_menu"
+              action="action_deferred_revenue_wizard"
+              sequence="30"/>
+
+    <!-- Management: Deferred Expense -->
+    <menuitem id="menu_deferred_expense"
+              name="Deferred Expense"
+              parent="account.account_reports_management_menu"
+              action="action_deferred_expense_wizard"
+              sequence="31"/>
+
+    <!-- Management: Loans Analysis -->
+    <menuitem id="menu_loans_analysis"
+              name="Loans Analysis"
+              parent="account.account_reports_management_menu"
+              action="action_loans_analysis_wizard"
+              sequence="40"/>
+
+</odoo>

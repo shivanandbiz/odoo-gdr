@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="gdr_balance_sheet.BalanceSheetReport">
+        <div class="bs-report-container">
+            <!-- Top toolbar -->
+            <div class="bs-toolbar">
+                <div class="bs-header-left">
+                    <button class="btn btn-sm bs-btn-pdf" t-on-click="onPdfClick">PDF</button>
+                    <button class="btn btn-sm bs-btn-xlsx" t-on-click="onXlsxClick">XLSX</button>
+                    <span class="bs-title">Balance Sheet <i class="fa fa-cog"/></span>
+                </div>
+                
+                <div class="bs-header-filters">
+                    <div class="bs-filter-item">
+                        <i class="fa fa-calendar"/> 
+                        <span class="ms-1 me-1">From</span>
+                        <input type="date" class="bs-date-input" t-att-value="state.dateFrom" t-on-change="onDateFromChange"/>
+                        <span class="ms-1 me-1">To</span>
+                        <input type="date" class="bs-date-input" t-att-value="state.dateTo" t-on-change="onDateChange"/>
+                    </div>
+                    <div class="bs-filter-item">
+                        % Comparison
+                    </div>
+                    <div class="bs-filter-item">
+                        <i class="fa fa-book"/> All Journals
+                    </div>
+                    <div class="bs-filter-item">
+                        <i class="fa fa-filter"/> 
+                        <select class="bs-select-inline ms-1" t-on-change="onTargetMoveChange">
+                            <option value="posted" t-att-selected="state.targetMove === 'posted'">Posted Entries</option>
+                            <option value="all" t-att-selected="state.targetMove === 'all'">All Entries</option>
+                        </select>
+                    </div>
+                    <div class="bs-filter-item">
+                        In ₹
+                    </div>
+                    <!-- Utility buttons -->
+                    <div class="bs-filter-item" style="padding: 2px 6px;">
+                        <button class="btn btn-sm p-0 me-2" t-on-click="unfoldAll" title="Unfold All">
+                            <i class="fa fa-expand text-muted"/>
+                        </button>
+                        <button class="btn btn-sm p-0" t-on-click="foldAll" title="Fold All">
+                            <i class="fa fa-compress text-muted"/>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scrollable content area -->
+            <div class="bs-report-content">
+
+                <!-- Loading spinner -->
+                <div t-if="state.loading" class="bs-loading">
+                    <i class="fa fa-spinner fa-spin fa-2x"/>
+                    <span class="ms-2">Loading Balance Sheet...</span>
+                </div>
+
+                <!-- Report table -->
+                <div t-if="!state.loading" class="bs-table-wrapper">
+                    <table class="bs-table">
+                        <thead>
+                            <tr>
+                                <th class="bs-th-name"/>
+                                <th class="bs-th-amount">
+                                    <div class="bs-th-date">
+                                        As of <t t-esc="state.dateToDisplay"/>
+                                    </div>
+                                    <div class="bs-th-balance">Balance</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody t-on-click="onRowClick">
+                            <t t-foreach="state.lines" t-as="line" t-key="line.id">
+                                <tr t-if="isLineVisible(line)"
+                                    t-att-class="getLineClass(line)"
+                                    t-att-data-line-id="line.id"
+                                    style="cursor: pointer;">
+                                    <td class="bs-td-name">
+                                        <div t-att-style="'padding-left: ' + (line.level * 30 + 10) + 'px;'"
+                                             class="bs-name-cell">
+                                            <!-- Expand/collapse triangle -->
+                                            <span t-if="hasChildren(line.id) and !line.is_section"
+                                                  class="bs-toggle-icon">
+                                                <i t-att-class="isExpanded(line.id) ? 'fa fa-caret-down' : 'fa fa-caret-right'"/>
+                                            </span>
+                                            <span t-elif="!line.is_section and !line.is_group"
+                                                  class="bs-toggle-placeholder"/>
+                                            <span t-att-class="line.is_account ? 'bs-account-name' : ''"
+                                                  t-esc="line.name"/>
+                                        </div>
+                                    </td>
+                                    <td t-att-class="getAmountClass(line)">
+                                        <t t-esc="formatAmount(line.balance)"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

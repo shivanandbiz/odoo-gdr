@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Wizard Form View -->
+    <record id="view_enterprise_report_wizard_form" model="ir.ui.view">
+        <field name="name">gdr.enterprise.report.wizard.form</field>
+        <field name="model">gdr.enterprise.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Report Wizard">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="report_type" invisible="1"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group>
+                            <field name="target_move"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_view_report" string="View Report" type="object" class="btn-primary"/>
+                    <button name="action_generate_excel" string="Export Excel" type="object" class="btn-secondary" icon="fa-download"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Report Display Tree View - Balance Only (reuses existing custom.report.display.line model) -->
+    <record id="view_enterprise_report_balance_tree" model="ir.ui.view">
+        <field name="name">gdr.enterprise.report.balance.tree</field>
+        <field name="model">custom.report.display.line</field>
+        <field name="arch" type="xml">
+            <list string="Report" create="0" edit="0" delete="0">
+                <field name="name" string="Particulars"/>
+                <field name="balance" string="Amount" sum="Total"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Report Display Tree View - Debit/Credit -->
+    <record id="view_depreciation_schedule_display_tree" model="ir.ui.view">
+        <field name="name">gdr.depreciation.schedule.tree</field>
+        <field name="model">custom.report.display.line</field>
+        <field name="arch" type="xml">
+            <list string="Depreciation Schedule" create="0" edit="0" delete="0">
+                <field name="name" string="Particulars"/>
+                <field name="debit" sum="Total Debit"/>
+                <field name="credit" sum="Total Credit"/>
+                <field name="balance" string="Net Value" sum="Total"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Actions for each report type -->
+    <record id="action_cash_flow_wizard" model="ir.actions.act_window">
+        <field name="name">Cash Flow Statement</field>
+        <field name="res_model">gdr.enterprise.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'cash_flow'}</field>
+    </record>
+
+    <record id="action_executive_summary_wizard" model="ir.actions.act_window">
+        <field name="name">Executive Summary</field>
+        <field name="res_model">gdr.enterprise.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'executive_summary'}</field>
+    </record>
+
+    <record id="action_depreciation_schedule_wizard" model="ir.actions.act_window">
+        <field name="name">Depreciation Schedule</field>
+        <field name="res_model">gdr.enterprise.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'depreciation_schedule'}</field>
+    </record>
+
+    <record id="action_deferred_revenue_wizard" model="ir.actions.act_window">
+        <field name="name">Deferred Revenue</field>
+        <field name="res_model">gdr.enterprise.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'deferred_revenue'}</field>
+    </record>
+
+    <record id="action_deferred_expense_wizard" model="ir.actions.act_window">
+        <field name="name">Deferred Expense</field>
+        <field name="res_model">gdr.enterprise.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'deferred_expense'}</field>
+    </record>
+
+    <record id="action_loans_analysis_wizard" model="ir.actions.act_window">
+        <field name="name">Loans Analysis</field>
+        <field name="res_model">gdr.enterprise.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'loans_analysis'}</field>
+    </record>
+</odoo>

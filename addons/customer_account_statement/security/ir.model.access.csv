@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_partner_statement_line_user,account.partner.statement.line.user,model_account_partner_statement_line,account.group_account_invoice,1,1,1,1
+access_account_partner_statement_line_manager,account.partner.statement.line.manager,model_account_partner_statement_line,account.group_account_manager,1,1,1,1
+access_account_partner_statement_wizard_user,account.partner.statement.wizard.user,model_account_partner_statement_wizard,account.group_account_invoice,1,1,1,1
+access_account_partner_statement_wizard_manager,account.partner.statement.wizard.manager,model_account_partner_statement_wizard,account.group_account_manager,1,1,1,1
+access_account_partner_statement_line_base,account.partner.statement.line.base,model_account_partner_statement_line,base.group_user,1,0,0,0
+access_account_partner_statement_wizard_base,account.partner.statement.wizard.base,model_account_partner_statement_wizard,base.group_user,1,1,1,0

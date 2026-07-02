@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_gstr9c_xlsx" model="ir.actions.report">
+        <field name="name">GSTR-9C Reconciliation Statement</field>
+        <field name="model">gstr9c.report.wizard</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">l10n_in_gstr9c_report.gstr9c_report_xlsx</field>
+        <field name="report_file">GSTR9C_Report</field>
+        <field name="binding_model_id" eval="False"/>
+    </record>
+</odoo>

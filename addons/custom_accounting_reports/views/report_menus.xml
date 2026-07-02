@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Custom Reports Menu -->
+    <menuitem id="menu_custom_accounting_reports_root" 
+              name="Custom Accounting Reports" 
+              parent="account.menu_finance_reports" 
+              sequence="100"/>
+
+    <!-- Specific Actions -->
+    <record id="action_bs_wizard" model="ir.actions.act_window">
+        <field name="name">Balance Sheet</field>
+        <field name="res_model">custom.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'balance_sheet'}</field>
+    </record>
+
+    <record id="action_pl_wizard" model="ir.actions.act_window">
+        <field name="name">Profit and Loss</field>
+        <field name="res_model">custom.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'profit_loss'}</field>
+    </record>
+
+    <record id="action_tb_wizard" model="ir.actions.act_window">
+        <field name="name">Trial Balance</field>
+        <field name="res_model">custom.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'trial_balance'}</field>
+    </record>
+
+    <record id="action_gl_wizard" model="ir.actions.act_window">
+        <field name="name">General Ledger</field>
+        <field name="res_model">custom.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'general_ledger'}</field>
+    </record>
+
+    <record id="action_partner_ledger_wizard" model="ir.actions.act_window">
+        <field name="name">Partner Ledger</field>
+        <field name="res_model">custom.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'partner_ledger'}</field>
+    </record>
+
+    <record id="action_cash_book_wizard" model="ir.actions.act_window">
+        <field name="name">Cash Book</field>
+        <field name="res_model">custom.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'cash_book'}</field>
+    </record>
+
+    <record id="action_tax_report_wizard" model="ir.actions.act_window">
+        <field name="name">Tax Report</field>
+        <field name="res_model">custom.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'tax_report'}</field>
+    </record>
+
+    <record id="action_gstr2b_reconciliation_wizard" model="ir.actions.act_window">
+        <field name="name">GSTR-2B Reconciliation</field>
+        <field name="res_model">custom.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'gstr2b_reconciliation'}</field>
+    </record>
+
+    <record id="action_gstr2a_reconciliation_wizard" model="ir.actions.act_window">
+        <field name="name">GSTR-2A Reconciliation</field>
+        <field name="res_model">custom.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'gstr2a_reconciliation'}</field>
+    </record>
+
+    <record id="action_annual_computation_wizard" model="ir.actions.act_window">
+        <field name="name">Annual Computation</field>
+        <field name="res_model">custom.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'annual_computation'}</field>
+    </record>
+
+    <record id="action_brs_statement_wizard" model="ir.actions.act_window">
+        <field name="name">Bank Reconciliation Statement (BRS)</field>
+        <field name="res_model">custom.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_report_type': 'brs_statement'}</field>
+    </record>
+
+    <!-- Menus under Custom Reports -->
+    <menuitem id="menu_bs_custom" name="Balance Sheet" parent="menu_custom_accounting_reports_root" action="action_bs_wizard" sequence="1"/>
+    <menuitem id="menu_pl_custom" name="Profit and Loss" parent="menu_custom_accounting_reports_root" action="action_pl_wizard" sequence="2"/>
+    <menuitem id="menu_tb_custom" name="Trial Balance" parent="menu_custom_accounting_reports_root" action="action_tb_wizard" sequence="3"/>
+    <menuitem id="menu_gl_custom" name="General Ledger" parent="menu_custom_accounting_reports_root" action="action_gl_wizard" sequence="4"/>
+    <menuitem id="menu_partner_ledger_custom" name="Partner Ledger" parent="menu_custom_accounting_reports_root" action="action_partner_ledger_wizard" sequence="5"/>
+    <menuitem id="menu_cash_book_custom" name="Cash Book" parent="menu_custom_accounting_reports_root" action="action_cash_book_wizard" sequence="6"/>
+    <menuitem id="menu_tax_report_custom" name="Tax Report" parent="menu_custom_accounting_reports_root" action="action_tax_report_wizard" sequence="7"/>
+    <menuitem id="menu_gstr2b_reconciliation_custom" name="GSTR-2B Reconciliation" parent="menu_custom_accounting_reports_root" action="action_gstr2b_reconciliation_wizard" sequence="8"/>
+    <menuitem id="menu_gstr2a_reconciliation_custom" name="GSTR-2A Reconciliation" parent="menu_custom_accounting_reports_root" action="action_gstr2a_reconciliation_wizard" sequence="9"/>
+    <menuitem id="menu_annual_computation_custom" name="Annual Computation" parent="menu_custom_accounting_reports_root" action="action_annual_computation_wizard" sequence="10"/>
+    <menuitem id="menu_brs_statement_custom" name="Bank Reconciliation (BRS)" parent="menu_custom_accounting_reports_root" action="action_brs_statement_wizard" sequence="11"/>
+
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_stock_barcode_dummy" model="ir.actions.act_window">
+        <field name="name">Barcode Scanner</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="menu_stock_barcode" name="Barcode Scanner" parent="mrp.menu_mrp_root" action="action_stock_barcode_dummy" sequence="100"/>
+    <record id="res_config_settings_view_form_inherit_barcode" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.barcode</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="mrp.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='module_stock_barcode']" position="attributes">
+                <attribute name="widget"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

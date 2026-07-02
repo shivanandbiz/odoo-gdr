@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Bulk Payment Tree View -->
+    <record id="view_gdr_bulk_payment_tree" model="ir.ui.view">
+        <field name="name">gdr.bulk.payment.tree</field>
+        <field name="model">gdr.bulk.payment</field>
+        <field name="arch" type="xml">
+            <list string="Bulk Payments">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="journal_id"/>
+                <field name="amount_total"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'posted'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Bulk Payment Form View -->
+    <record id="view_gdr_bulk_payment_form" model="ir.ui.view">
+        <field name="name">gdr.bulk.payment.form</field>
+        <field name="model">gdr.bulk.payment</field>
+        <field name="arch" type="xml">
+            <form string="Bulk Payment">
+                <header>
+                    <button name="action_post" string="Post" type="object" invisible="state != 'draft'" class="oe_highlight"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date" readonly="state != 'draft'"/>
+                            <field name="journal_id" readonly="state != 'draft'"/>
+                            <field name="payment_method_line_id" readonly="state != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="amount_total"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Payments">
+                            <field name="payment_ids" readonly="1">
+                                <list string="Payments">
+                                    <field name="date"/>
+                                    <field name="name"/>
+                                    <field name="partner_id"/>
+                                    <field name="amount"/>
+                                    <field name="state" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Bulk Payments Action for Customers -->
+    <record id="action_gdr_bulk_payments_customer" model="ir.actions.act_window">
+        <field name="name">History Bulk Payments</field>
+        <field name="res_model">gdr.bulk.payment</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('payment_ids.partner_type', '=', 'customer')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No bulk payments found!
+            </p>
+            <p>
+                Bulk payments allow you to receive payments for multiple customer invoices at once.
+            </p>
+        </field>
+    </record>
+
+    <!-- Bulk Payments Action for Vendors -->
+    <record id="action_gdr_bulk_payments" model="ir.actions.act_window">
+        <field name="name">History Bulk Payments</field>
+        <field name="res_model">gdr.bulk.payment</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('payment_ids.partner_type', '=', 'supplier')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No bulk payments found!
+            </p>
+            <p>
+                Bulk payments allow you to pay multiple vendor bills at once.
+            </p>
+        </field>
+    </record>
+
+    <!-- Customer Advances Action -->
+    <record id="action_gdr_customer_advances" model="ir.actions.act_window">
+        <field name="name">Customer Advances</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'default_payment_type': 'inbound', 'default_partner_type': 'customer'}</field>
+        <field name="domain">[('payment_type', '=', 'inbound'), ('partner_type', '=', 'customer')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Record a new customer advance payment
+            </p>
+        </field>
+    </record>
+
+    <!-- Vendor Advances Action -->
+    <record id="action_gdr_vendor_advances" model="ir.actions.act_window">
+        <field name="name">Vendor Advances</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'default_payment_type': 'outbound', 'default_partner_type': 'supplier'}</field>
+        <field name="domain">[('payment_type', '=', 'outbound'), ('partner_type', '=', 'supplier')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Record a new vendor advance payment
+            </p>
+        </field>
+    </record>
+
+    <!-- Extending Account Payment Form to show Bulk Payment Reference -->
+    <record id="view_account_payment_form_inherit_bulk" model="ir.ui.view">
+        <field name="name">account.payment.form.inherit.bulk</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='journal_id']" position="after">
+                <field name="gdr_bulk_payment_id" invisible="not gdr_bulk_payment_id"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

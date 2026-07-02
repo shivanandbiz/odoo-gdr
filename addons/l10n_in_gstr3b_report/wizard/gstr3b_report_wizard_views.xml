@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_gstr3b_report_wizard_form" model="ir.ui.view">
+        <field name="name">gstr3b.report.wizard.form</field>
+        <field name="model">gstr3b.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="GSTR-3B Summary Report">
+                <group>
+                    <group>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                    </group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="summary_html" nolabel="1" colspan="2" readonly="1" widget="html"/>
+                </group>
+                <footer>
+                    <button name="action_generate_report" string="Download Excel" type="object" class="btn-primary" data-hotkey="q"/>
+                    <button string="Close" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_gstr3b_report_wizard" model="ir.actions.act_window">
+        <field name="name">GSTR-3B Report</field>
+        <field name="res_model">gstr3b.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_gstr3b_report" 
+              name="GSTR-3B Report" 
+              parent="account.account_reports_management_menu" 
+              action="action_gstr3b_report_wizard" 
+              sequence="199"/>
+</odoo>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_quality_point" model="ir.actions.act_window">
+        <field name="name">Quality Points</field>
+        <field name="res_model">quality.point</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="action_quality_check" model="ir.actions.act_window">
+        <field name="name">Quality Checks</field>
+        <field name="res_model">quality.check</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="menu_quality_root" name="Quality Control" parent="mrp.menu_mrp_root" sequence="25"/>
+    <menuitem id="menu_quality_point" name="Quality Points" parent="menu_quality_root" action="action_quality_point"/>
+    <menuitem id="menu_quality_check" name="Quality Checks" parent="menu_quality_root" action="action_quality_check"/>
+    <record id="res_config_settings_view_form_inherit_quality" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.quality</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="mrp.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='module_quality_control']" position="attributes">
+                <attribute name="widget"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_gstr9_report_wizard" model="ir.ui.view">
+        <field name="name">gstr9.report.wizard.form</field>
+        <field name="model">gstr9.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="GSTR-9 Report">
+                <group>
+                    <group>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                    </group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="print_report" string="Generate Report" type="object" class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_gstr9_report_wizard" model="ir.actions.act_window">
+        <field name="name">GSTR-9 Annual Return Report</field>
+        <field name="res_model">gstr9.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_gstr9_report" 
+              name="GSTR-9 Report" 
+              parent="account.account_reports_management_menu" 
+              action="action_gstr9_report_wizard" 
+              sequence="200"/>
+</odoo>

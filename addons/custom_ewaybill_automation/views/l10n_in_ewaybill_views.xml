@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="l10n_in_ewaybill_form_view_inherit" model="ir.ui.view">
+        <field name="name">l10n.in.ewaybill.form.view.inherit</field>
+        <field name="model">l10n.in.ewaybill</field>
+        <field name="inherit_id" ref="l10n_in_ewaybill.l10n_in_ewaybill_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Add Transporter Detail below Transporter Doc No -->
+            <xpath expr="//field[@name='transportation_doc_no']/parent::div" position="after">
+                <field name="transporter_detail" invisible="not transporter_detail" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

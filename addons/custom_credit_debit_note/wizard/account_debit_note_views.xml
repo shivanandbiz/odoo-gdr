@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_debit_note_inherit" model="ir.ui.view">
+        <field name="name">account.debit.note.form.inherit</field>
+        <field name="model">account.debit.note</field>
+        <field name="inherit_id" ref="account_debit_note.view_account_debit_note"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='journal_id']" position="after">
+                <field name="l10n_in_gst_reason"/>
+            </xpath>
+            
+            <xpath expr="//group" position="after">
+                <notebook>
+                    <page string="Item Selection (Debit Note)">
+                        <field name="reversal_line_ids">
+                            <list editable="bottom" create="false" delete="false">
+                                <field name="move_line_id" column_invisible="True"/>
+                                <field name="product_id"/>
+                                <field name="name"/>
+                                <field name="original_quantity"/>
+                                <field name="quantity" string="Qty to Debit"/>
+                                <field name="price_unit"/>
+                                <field name="tax_ids" widget="many2many_tags"/>
+                            </list>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+</odoo>

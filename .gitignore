@@ -1,0 +1,13 @@
+*.sql
+*.zip
+*.tar
+*.tar.gz
+*.log
+__pycache__/
+*.pyc
+
+backups/
+scratch/
+odoo-venv/
+addons_backup*/
+odoo_backup*/

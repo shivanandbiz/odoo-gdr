@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Client Action for Enterprise-style Balance Sheet -->
+    <record id="action_gdr_balance_sheet" model="ir.actions.client">
+        <field name="name">Balance Sheet</field>
+        <field name="tag">gdr_balance_sheet_report</field>
+    </record>
+
+    <!-- Menu item under Accounting > Reporting -->
+    <menuitem id="menu_gdr_balance_sheet"
+              name="Balance Sheet"
+              parent="account.account_reports_legal_statements_menu"
+              action="action_gdr_balance_sheet"
+              sequence="0"/>
+
+    <!-- Client Action for Enterprise-style Profit and Loss -->
+    <record id="action_gdr_profit_loss" model="ir.actions.client">
+        <field name="name">Profit and Loss</field>
+        <field name="tag">gdr_profit_loss_report</field>
+    </record>
+
+    <!-- Menu item under Accounting > Reporting -->
+    <menuitem id="menu_gdr_profit_loss"
+              name="Profit and Loss"
+              parent="account.account_reports_legal_statements_menu"
+              action="action_gdr_profit_loss"
+              sequence="1"/>
+
+    <!-- Override the Custom Accounting Reports menu item if it exists -->
+    <menuitem id="custom_accounting_reports.menu_bs_custom" 
+              name="Balance Sheet" 
+              parent="custom_accounting_reports.menu_custom_accounting_reports_root" 
+              action="action_gdr_balance_sheet" 
+              sequence="1"/>
+
+    <!-- Override the Custom Accounting Reports menu item if it exists -->
+    <menuitem id="custom_accounting_reports.menu_pl_custom" 
+              name="Profit and Loss" 
+              parent="custom_accounting_reports.menu_custom_accounting_reports_root" 
+              action="action_gdr_profit_loss" 
+              sequence="2"/>
+</odoo>

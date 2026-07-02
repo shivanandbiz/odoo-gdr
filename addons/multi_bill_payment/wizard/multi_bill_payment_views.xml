@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_multi_bill_payment_form" model="ir.ui.view">
+        <field name="name">multi.bill.payment.form</field>
+        <field name="model">multi.bill.payment</field>
+        <field name="arch" type="xml">
+            <form string="Bulk Payment">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>Record Bulk Payment</h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id" widget="res_partner_many2one"/>
+                            <field name="amount"/>
+                        </group>
+                        <group>
+                            <field name="payment_date"/>
+                            <field name="journal_id"/>
+                            <field name="communication"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Allocation">
+                            <div class="mb-2">
+                                <button name="action_pay_full_all" string="Pay in Full All" type="object" class="btn-link oe_inline" icon="fa-bolt"/>
+                                <button name="action_clear_all" string="Clear All" type="object" class="btn-link oe_inline" icon="fa-times"/>
+                            </div>
+                            <field name="line_ids">
+                                <list editable="bottom" create="0">
+                                    <field name="invoice_id" readonly="1"/>
+                                    <field name="date" readonly="1"/>
+                                    <field name="date_due" readonly="1"/>
+                                    <field name="amount_total" readonly="1"/>
+                                    <field name="amount_residual" readonly="1"/>
+                                    <field name="amount_applied"/>
+                                    <button name="action_full" string="Full" type="object" icon="fa-arrow-right"/>
+                                    <field name="currency_id" column_invisible="True"/>
+                                </list>
+                            </field>
+                            <group class="oe_subtotal_footer">
+                                <field name="amount" string="Amount Paid:"/>
+                                <field name="total_allocated" string="Total Allocated:"/>
+                                <field name="amount_unallocated" string="Unallocated (Credit):" class="oe_subtotal_footer_separator"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="action_create_payments" string="Create Payments" type="object" class="btn-primary"/>
+                    <button string="Discard" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_multi_bill_payment" model="ir.actions.act_window">
+        <field name="name">Bulk Payment</field>
+        <field name="res_model">multi.bill.payment</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

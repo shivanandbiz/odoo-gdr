@@ -1,0 +1,100 @@
+# The officially supported versions of the following packages are their
+# python3-* equivalent distributed in Ubuntu 24.04 and Debian 12
+asn1crypto ; python_version < '3.11'
+asn1crypto ; python_version >= '3.11'
+Babel ; python_version < '3.11'  # min version = 2.6.0 (Focal with security backports)
+Babel ; python_version >= '3.11' and python_version < '3.13'
+Babel ; python_version >= '3.13'
+cbor2post1 ; python_version < '3.11'  # (Jammy)
+cbor2 ; python_version >= '3.11' and python_version < '3.12'  # (Bookworm)
+cbor2 ; python_version >= '3.12'
+chardet ; python_version < '3.11'  # (Jammy)
+chardet ; python_version >= '3.11'
+cryptography; python_version < '3.12'  # incompatibility between pyopenssl 19.0.0 and cryptography>=37.0.0
+cryptography ; python_version >= '3.12'  # (Noble) min 41.0.7, pinning 42.0.8 for security fixes
+docutils ; python_version < '3.11'  # (Jammy)
+docutils ; python_version >= '3.11'
+freezegun ; python_version < '3.11'  # (Jammy)
+freezegun ; python_version >= '3.11' and python_version < '3.13'
+freezegun ; python_version >= '3.13'
+geoip2
+gevent ; sys_platform != 'win32' and python_version == '3.10'  # (Jammy)
+gevent; sys_platform != 'win32' and python_version > '3.10' and python_version < '3.12'
+gevent ; sys_platform != 'win32' and python_version >= '3.12' and python_version < '3.13'  # (Noble)
+gevent ; sys_platform != 'win32' and python_version >= '3.13'  # (Trixie)
+greenlet ; sys_platform != 'win32' and python_version == '3.10'  # (Jammy)
+greenlet ; sys_platform != 'win32' and python_version > '3.10' and python_version < '3.12'
+greenlet ; sys_platform != 'win32' and python_version >= '3.12' and python_version < '3.13' # (Noble)
+greenlet ; sys_platform != 'win32' and python_version >= '3.13'  # (Trixie)
+idna ; python_version < '3.12'  # requests 2.25.1 depends on idna<3 and >=2.5
+idna ; python_version >= '3.12'
+Jinja2 ; python_version <= '3.10'
+Jinja2 ; python_version > '3.10'
+libsass ; python_version < '3.11'
+libsass ; python_version >= '3.11'  # (Noble) Mostly to have a wheel package
+lxml ; python_version <= '3.10'
+lxml ; python_version > '3.10' and python_version < '3.12' # min 4.9.2, pinning 4.9.3 because of missing wheels for darwin in 4.9.3
+lxml; python_version >= '3.12' # (Noble - removed html clean)
+lxml-html-clean; python_version >= '3.12' # (Noble - removed from lxml, unpinned for futur security patches)
+MarkupSafe ; python_version <= '3.10'
+MarkupSafe ; python_version > '3.10' and python_version < '3.12'
+MarkupSafe ; python_version >= '3.12'  # (Noble) Mostly to have a wheel package
+num2words ; python_version < '3.12'  # (Jammy / Bookworm)
+num2words ; python_version >= '3.12' 
+ofxparse
+openpyxl ; python_version < '3.12'
+openpyxl ; python_version >= '3.12'
+passlib # min version = 1.7.2 (Focal with security backports)
+Pillow ; python_version <= '3.10'
+Pillow ; python_version > '3.10' and python_version < '3.12'
+Pillow ; python_version >= '3.12' and python_version < '3.13'  # (Noble) Mostly to have a wheel package
+Pillow ; python_version >= '3.13'  # (Noble) Mostly to have a wheel package
+polib
+psutil ; python_version <= '3.10' 
+psutil ; python_version > '3.10' and python_version < '3.12' 
+psutil ; python_version >= '3.12' # (Noble) Mostly to have a wheel package
+psycopg2 ; python_version == '3.10' # (Jammy)
+psycopg2 ; python_version == '3.11'
+psycopg2 ; python_version >= '3.12' and python_version < '3.13' # (Noble)
+psycopg2 ; python_version >= '3.13' # (Trixie)
+pyopenssl ; python_version < '3.12'
+pyopenssl ; python_version >= '3.12' # (Noble) min 23.2.0, pinned for compatibility with cryptography and security patches
+PyPDF2 ; python_version <= '3.10'
+PyPDF2 ; python_version > '3.10' and python_version < '3.13' # (Noble and below)
+PyPDF ; python_version >= '3.13' # (Trixie)
+pypiwin32 ; sys_platform == 'win32'
+pyserial
+python-dateutil ; python_version < '3.11'
+python-dateutil ; python_version >= '3.11'
+python-magic; sys_platform != 'win32' and python_version < '3.12'  # (jammy)
+python-magic; sys_platform != 'win32' and python_version >= '3.12'  # (noble)
+python-ldap ; sys_platform != 'win32' and python_version < '3.12' # min version = 3.2.0 (Focal with security backports)
+python-ldap ; sys_platform != 'win32' and python_version >= '3.12'  # (Noble) Mostly to have a wheel package
+python-stdnum ; python_version < '3.11'  # (jammy)
+python-stdnum ; python_version >= '3.11'
+pytz  # no version pinning to avoid OS perturbations
+pyusb
+qrcode ; python_version < '3.11'  # (jammy)
+qrcode ; python_version >= '3.11'
+reportlab ; python_version <= '3.10'
+reportlab ; python_version > '3.10' and python_version < '3.12'
+reportlab ; python_version >= '3.12' # (Noble) Mostly to have a wheel package
+requests ;  python_version < '3.11' # versions < 2.25 aren't compatible w/ urllib3 1.26. Bullseye = 2.25.1. min version = 2.22.0 (Focal)
+requests ; python_version >= '3.11' # (Noble)
+rjsmin ; python_version < '3.11'  # (jammy)
+rjsmin ; python_version >= '3.11'
+rl-renderPM ; sys_platform == 'win32' and python_version >= '3.12'  # Needed by reportlab 4.1.0 but included in deb package
+urllib3 ; python_version < '3.12' # indirect / min version = 1.25.8 (Focal with security backports)
+urllib3  ; python_version >= '3.12'  # (Noble) Compatibility with cryptography
+vobject
+Werkzeug ; python_version <= '3.10' 
+Werkzeug ; python_version > '3.10' and python_version < '3.12'
+Werkzeug ; python_version >= '3.12'  # (Noble) Avoid deprecation warnings
+xlrd ; python_version < '3.12'  # (jammy)
+xlrd ; python_version >= '3.12'
+XlsxWriter ; python_version < '3.12'  # (jammy)
+XlsxWriter ; python_version >= '3.12'
+xlwt
+zeep ; python_version < '3.11'  # (jammy)
+zeep ; python_version >= '3.11' and python_version < '3.13'
+zeep ; python_version >= '3.13'

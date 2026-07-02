@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gdr_bulk_payment,gdr.bulk.payment,model_gdr_bulk_payment,account.group_account_user,1,1,1,1
+access_gdr_bulk_payment_manager,gdr.bulk.payment.manager,model_gdr_bulk_payment,account.group_account_manager,1,1,1,1
+access_gdr_bulk_payment_wizard,gdr.bulk.payment.wizard,model_gdr_bulk_payment_wizard,account.group_account_user,1,1,1,1

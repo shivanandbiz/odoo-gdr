@@ -1,0 +1,298 @@
+/* === GDR Enterprise Balance Sheet === */
+
+.bs-report-container {
+    background: #f8f9fa;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px;
+    color: #212529;
+}
+
+/* Toolbar */
+.bs-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #fff;
+    border-bottom: 1px solid #dee2e6;
+    flex-shrink: 0; /* Prevent toolbar from shrinking */
+    z-index: 10;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.bs-report-content {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding-bottom: 50px;
+}
+.bs-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.bs-btn-pdf {
+    background-color: #714B67;
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 4px;
+}
+.bs-btn-pdf:hover {
+    background-color: #5c3d54;
+    color: #fff;
+}
+.bs-btn-xlsx {
+    background-color: #E6E8EA;
+    color: #495057;
+    border: none;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 4px;
+}
+.bs-btn-xlsx:hover {
+    background-color: #d1d3d4;
+    color: #495057;
+}
+.bs-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #212529;
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.bs-title i {
+    font-size: 14px;
+    color: #6c757d;
+    cursor: pointer;
+}
+.bs-header-filters {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.bs-filter-item {
+    background-color: #E6E8EA;
+    color: #495057;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.bs-filter-item:hover {
+    background-color: #d1d3d4;
+}
+.bs-date-input {
+    background: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: #495057;
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+}
+.bs-select-inline {
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Warning banner */
+.bs-warning-banner {
+    background: #d4edda;
+    color: #155724;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 13px;
+    border-bottom: 1px solid #c3e6cb;
+}
+
+/* Loading */
+.bs-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+/* Table wrapper */
+.bs-table-wrapper {
+    max-width: 950px;
+    margin: 20px auto 40px auto;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    overflow: hidden; /* Ensures child elements don't spill out of border-radius */
+}
+
+/* Table */
+.bs-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.bs-table thead th {
+    text-align: right;
+    font-weight: 400;
+    color: #6c757d;
+    font-size: 12px;
+    padding: 12px 16px;
+    border-bottom: 2px solid #dee2e6;
+}
+.bs-th-name {
+    text-align: left !important;
+    width: 60%;
+}
+.bs-th-amount {
+    width: 40%;
+    text-align: right !important;
+}
+.bs-th-date {
+    color: #495057;
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+.bs-th-balance {
+    font-style: italic;
+    color: #868e96;
+    font-size: 11px;
+}
+
+/* Row styles */
+.bs-table tbody tr {
+    border-bottom: 1px solid #f1f3f5;
+    transition: background 0.1s;
+}
+.bs-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+/* Section headers (ASSETS, LIABILITIES, EQUITY) */
+.bs-section {
+    background: #f0f0f0 !important;
+    cursor: default;
+}
+.bs-section td {
+    padding: 10px 12px;
+    font-weight: 700;
+    font-size: 13px;
+    border-bottom: 2px solid #dee2e6 !important;
+}
+.bs-section .bs-td-name {
+    color: #212529;
+}
+.bs-section .bs-amount {
+    font-weight: 700;
+    color: #212529;
+}
+
+/* Group headers (Current Assets, Current Liabilities, etc.) */
+.bs-group td {
+    padding: 8px 12px;
+    font-weight: 700;
+    font-size: 13px;
+    color: #212529;
+}
+.bs-group .bs-amount {
+    font-weight: 700;
+}
+
+/* Leaf lines (Bank and Cash, Receivables, etc.) */
+.bs-leaf {
+    cursor: pointer;
+}
+.bs-leaf td {
+    padding: 6px 12px;
+    font-size: 13px;
+}
+.bs-leaf .bs-td-name {
+    color: #495057;
+}
+
+/* Account lines (individual accounts) */
+.bs-account td {
+    padding: 4px 12px;
+    font-size: 12px;
+    color: #6c757d;
+}
+.bs-account .bs-account-name {
+    color: #007bff;
+    cursor: pointer;
+}
+.bs-account .bs-account-name:hover {
+    text-decoration: underline;
+}
+
+/* Amount cell */
+.bs-amount {
+    text-align: right;
+    padding: 6px 12px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+/* Negative amounts */
+.bs-negative-amount {
+    color: #e74c3c !important;
+}
+
+/* Name cell */
+.bs-td-name {
+    text-align: left;
+}
+.bs-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Toggle icon */
+.bs-toggle-icon {
+    width: 16px;
+    text-align: center;
+    color: #868e96;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.bs-toggle-icon:hover {
+    color: #495057;
+}
+.bs-toggle-placeholder {
+    width: 16px;
+    flex-shrink: 0;
+}
+
+/* Print styles */
+@media print {
+    .bs-toolbar, .bs-warning-banner {
+        display: none !important;
+    }
+    .bs-report-container {
+        min-height: auto;
+    }
+    .bs-table-wrapper {
+        padding: 0;
+        max-width: 100%;
+    }
+    .bs-table tbody tr:hover {
+        background: transparent;
+    }
+}

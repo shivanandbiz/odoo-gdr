@@ -1,0 +1,33 @@
+<odoo>
+    <record id="account_journal_dashboard_kanban_view_inherit" model="ir.ui.view">
+        <field name="name">account.journal.dashboard.kanban.inherit</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view"/>
+        <field name="arch" type="xml">
+
+            <!-- Add "To Reconcile" count button in the bank card body -->
+            <xpath expr="//div[@name='bank_cash_buttons']" position="inside">
+                <t t-if="dashboard.number_to_reconcile > 0">
+                    <button type="object" name="action_open_reconcile" class="btn btn-primary">
+                        <t t-out="dashboard.number_to_reconcile"/> to reconcile
+                    </button>
+                </t>
+            </xpath>
+
+            <!-- Add "Import File" and "Reconcile" links in the dropdown menu's New section -->
+            <xpath expr="//div[@name='bank_customer_payment']" position="before">
+                <div name="bank_import_file">
+                    <a role="menuitem" type="object" name="action_open_import_file">Import File</a>
+                </div>
+            </xpath>
+
+            <!-- Add Reconcile link in the View section of the dropdown -->
+            <xpath expr="//div[@id='action_card_statements']" position="after">
+                <div>
+                    <a role="menuitem" type="object" name="action_open_reconcile">Reconcile</a>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

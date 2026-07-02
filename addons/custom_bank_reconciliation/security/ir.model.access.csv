@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custom_bank_statement_import,custom.bank.statement.import,model_custom_bank_statement_import,account.group_account_basic,1,1,1,1

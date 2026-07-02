@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_partner_statement_wizard_form" model="ir.ui.view">
+        <field name="name">account.partner.statement.wizard.form</field>
+        <field name="model">account.partner.statement.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate Account Statement">
+                <group>
+                    <group>
+                        <field name="partner_id" readonly="1"/>
+                        <field name="date_from"/>
+                    </group>
+                    <group>
+                        <field name="date_to"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_generate_statement" string="Generate Statement" type="object" class="btn-primary"/>
+                    <button name="action_print_statement" string="Print PDF" type="object" class="btn-secondary" icon="fa-print"/>
+                    <button name="action_send_statement_email" string="Send by Email" type="object" class="btn-secondary" icon="fa-envelope"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

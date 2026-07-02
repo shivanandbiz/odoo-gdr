@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_gdr_bulk_payment_wizard_form" model="ir.ui.view">
+        <field name="name">gdr.bulk.payment.wizard.form</field>
+        <field name="model">gdr.bulk.payment.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Bulk Payment">
+                <group>
+                    <field name="journal_id"/>
+                    <field name="payment_method_line_id"/>
+                    <field name="payment_date"/>
+                </group>
+                <footer>
+                    <button name="action_create_bulk_payment" string="Create Bulk Payment" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_gdr_bulk_payment_wizard" model="ir.actions.act_window">
+        <field name="name">Bulk Payment</field>
+        <field name="res_model">gdr.bulk.payment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_view_types">list</field>
+    </record>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_gstr2b_xlsx" model="ir.actions.report">
+        <field name="name">GSTR-2B Reconciliation</field>
+        <field name="model">gstr2b.report.wizard</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">l10n_in_gstr2b_report.gstr2b_report_xlsx</field>
+        <field name="report_file">GSTR-2B Reconciliation</field>
+        <field name="print_report_name">'GSTR-2B Reconciliation'</field>
+    </record>
+</odoo>

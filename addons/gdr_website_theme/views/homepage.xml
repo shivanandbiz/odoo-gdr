@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="gdr_homepage" inherit_id="website.homepage" name="GDR Mektek Homepage">
+        <xpath expr="//div[@id='wrap']" position="replace">
+            <div id="wrap" class="oe_structure">
+                
+                <!-- Floating Banner Carousel Section -->
+                <section class="gdr_banner_outer py-5 bg-white">
+                    <div class="container">
+                        <div id="gdrHeroCarousel" class="carousel slide gdr_floating_banner" data-bs-ride="carousel" data-bs-interval="2500" data-bs-pause="false">
+                            <div class="carousel-inner">
+                                <!-- Slide 1: Railway -->
+                                <div class="carousel-item active">
+                                    <div class="gdr_slide_content px-5" style="background: url('/gdr_website_theme/static/src/img/hero.png'); background-size: cover;">
+                                        <div class="gdr_text_box text-white text-start">
+                                            <h1>SCALABLE<br/>ENGINEERING</h1>
+                                            <p>Innovating for the future of transport and industry.</p>
+                                            <a href="/contactus" class="btn btn-gdr-primary mt-3">LEARN MORE</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Slide 2: Railway Train -->
+                                <div class="carousel-item">
+                                    <div class="gdr_slide_content px-5" style="background: url('/gdr_website_theme/static/src/img/train_hero.png'); background-size: cover;">
+                                        <div class="gdr_text_box text-white text-start">
+                                            <h1>MODERN<br/>RAILWAYS</h1>
+                                            <p>RDSO Approved Braking Systems and Test Rigs.</p>
+                                            <a href="/railway" class="btn btn-gdr-primary mt-3">VIEW SOLUTIONS</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#gdrHeroCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#gdrHeroCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Welcome Section -->
+                <section class="py-5 text-center bg-white">
+                    <div class="container">
+                        <h1 class="display-4 fw-bold text-primary mb-3">Welcome to GDR Mektek</h1>
+                        <p class="lead text-muted mx-auto" style="max-width: 800px;">
+                            We provide state-of-the-art engineering solutions for material handling, special purpose machines, and railway components. Streamline your industrial operations with our custom precision tools.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Key Stats -->
+                <section class="gdr_stats py-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3 stat-item" data-aos="zoom-in">
+                                <span class="number">18+</span>
+                                <span class="label">Years of Innovation</span>
+                            </div>
+                            <div class="col-md-3 stat-item" data-aos="zoom-in" data-aos-delay="100">
+                                <span class="number">500+</span>
+                                <span class="label">Projects Delivered</span>
+                            </div>
+                            <div class="col-md-3 stat-item" data-aos="zoom-in" data-aos-delay="200">
+                                <span class="number">ISO</span>
+                                <span class="label">9001:2015 Certified</span>
+                            </div>
+                            <div class="col-md-3 stat-item" data-aos="zoom-in" data-aos-delay="300">
+                                <span class="number">RDSO</span>
+                                <span class="label">Approved Supplier</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Product Categories -->
+                <section id="products" class="py-5 bg-light">
+                    <div class="container">
+                        <div class="gdr_section_title">
+                            <h2>Our Core Specializations</h2>
+                        </div>
+                        <div class="row g-4">
+                            <!-- Category 1 -->
+                            <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                                <div class="gdr_category_card">
+                                    <img src="/gdr_website_theme/static/src/img/material_handling.png" class="card-img-top" alt="Material Handling"/>
+                                    <div class="card-body">
+                                        <h3>Material Handling</h3>
+                                        <p>Comprehensive solutions for lifting, moving, and storing heavy industrial loads. Featuring industrial lifting tongs, C-hooks, coil tilters, and transfer cars.</p>
+                                        <a href="/material-handling" class="btn btn-link px-0 text-danger fw-bold">Learn More →</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Category 2 -->
+                            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                                <div class="gdr_category_card">
+                                    <img src="/gdr_website_theme/static/src/img/spm.png" class="card-img-top" alt="Special Purpose Machines"/>
+                                    <div class="card-body">
+                                        <h3>Special Purpose Machines</h3>
+                                        <p>Custom-engineered assembly lines, leak testing machines, and automated industrial solutions designed for precision manufacturing processes.</p>
+                                        <a href="/spm" class="btn btn-link px-0 text-danger fw-bold">Learn More →</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Category 3 -->
+                            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                                <div class="gdr_category_card">
+                                    <img src="/gdr_website_theme/static/src/img/railway.png" class="card-img-top" alt="Railway Products"/>
+                                    <div class="card-body">
+                                        <h3>Railway Solutions</h3>
+                                        <p>Pioneering RDSO-certified railway components, including Bogie Mounted Brake Systems and specialized testing rigs for railway applications.</p>
+                                        <a href="/railway" class="btn btn-link px-0 text-danger fw-bold">Learn More →</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- About Us Snippet -->
+                <section class="py-5">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6" data-aos="fade-right">
+                                <div class="pe-lg-5">
+                                    <h2 class="fw-bold text-primary mb-4">Precision Engineering at its Best</h2>
+                                    <p class="lead">GDR Mektek Pvt Ltd has been at the forefront of engineering excellence since 2006.</p>
+                                    <p class="text-muted">Located in the industrial heart of Bengaluru, we serve diverse sectors including Automotive, Aerospace, and Steel Plants. Our focus on innovation and custom engineering allows us to solve complex manufacturing challenges with world-class precision.</p>
+                                    <ul class="list-unstyled mt-4">
+                                        <li class="mb-2"><i class="fa fa-check-circle text-danger me-2"></i> Custom-engineered SPM solutions</li>
+                                        <li class="mb-2"><i class="fa fa-check-circle text-danger me-2"></i> Robust material handling equipment</li>
+                                        <li class="mb-2"><i class="fa fa-check-circle text-danger me-2"></i> ISO 9001:2015 and RDSO Certified</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6" data-aos="fade-left">
+                                <img src="/gdr_website_theme/static/src/img/hero.png" class="img-fluid rounded-3 shadow-lg" alt="Industrial Manufacturing"/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Client Industries -->
+                <section class="py-5 bg-dark text-white">
+                    <div class="container text-center">
+                        <h2 class="mb-5">Industries We Serve</h2>
+                        <div class="row justify-content-center">
+                            <div class="col-md-2 col-6 mb-4">
+                                <div class="industry-icon mb-3"><i class="fa fa-car fa-3x text-danger"></i></div>
+                                <h5>Automotive</h5>
+                            </div>
+                            <div class="col-md-2 col-6 mb-4">
+                                <div class="industry-icon mb-3"><i class="fa fa-plane fa-3x text-danger"></i></div>
+                                <h5>Aerospace</h5>
+                            </div>
+                            <div class="col-md-2 col-6 mb-4">
+                                <div class="industry-icon mb-3"><i class="fa fa-industry fa-3x text-danger"></i></div>
+                                <h5>Steel Plants</h5>
+                            </div>
+                            <div class="col-md-2 col-6 mb-4">
+                                <div class="industry-icon mb-3"><i class="fa fa-train fa-3x text-danger"></i></div>
+                                <h5>Railways</h5>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Call to Action -->
+                <section class="py-5 text-center">
+                    <div class="container">
+                        <h2 class="fw-bold mb-4">Ready to Optimize Your Production?</h2>
+                        <p class="lead mb-5 text-muted">Contact our engineering team today for a custom solution tailored to your requirements.</p>
+                        <a href="/contactus" class="btn btn-gdr-primary btn-lg">Request Consultation</a>
+                    </div>
+                </section>
+
+            </div>
+        </xpath>
+    </template>
+</odoo>

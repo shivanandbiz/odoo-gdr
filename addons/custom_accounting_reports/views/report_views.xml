@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_custom_report_wizard_form" model="ir.ui.view">
+        <field name="name">custom.report.wizard.form</field>
+        <field name="model">custom.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Report Parameters">
+                <group>
+                    <field name="report_type" invisible="1"/>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <group>
+                        <field name="target_move"/>
+                        <field name="journal_id" invisible="report_type != 'brs_statement'" required="report_type == 'brs_statement'"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_view_report" string="View Report" type="object" class="btn-primary"/>
+                    <button name="action_generate_excel" string="Download Excel" type="object" class="btn-secondary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Specific List Views for Report Display -->
+    <record id="view_brs_statement_display_tree" model="ir.ui.view">
+        <field name="name">custom.brs.statement.display.list</field>
+        <field name="model">custom.report.display.line</field>
+        <field name="arch" type="xml">
+            <list string="Bank Reconciliation Statement" create="0" edit="0" delete="0">
+                <field name="date"/>
+                <field name="ref" string="Voucher No / Ref"/>
+                <field name="name" string="Particulars / Description"/>
+                <field name="debit" sum="Total Debit"/>
+                <field name="credit" sum="Total Credit"/>
+                <field name="balance" string="Balance"/>
+                <field name="invoice_status_amount" string="Status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_balance_sheet_display_tree" model="ir.ui.view">
+        <field name="name">custom.balance.sheet.display.list</field>
+        <field name="model">custom.report.display.line</field>
+        <field name="arch" type="xml">
+            <list string="Balance Sheet" create="0" edit="0" delete="0">
+                <field name="name"/>
+                <field name="balance" sum="Total"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_profit_loss_display_tree" model="ir.ui.view">
+        <field name="name">custom.profit.loss.display.list</field>
+        <field name="model">custom.report.display.line</field>
+        <field name="arch" type="xml">
+            <list string="Profit and Loss" create="0" edit="0" delete="0">
+                <field name="name"/>
+                <field name="balance"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_trial_balance_display_tree" model="ir.ui.view">
+        <field name="name">custom.trial.balance.display.list</field>
+        <field name="model">custom.report.display.line</field>
+        <field name="arch" type="xml">
+            <list string="Trial Balance" create="0" edit="0" delete="0">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="debit" sum="Total Debit"/>
+                <field name="credit" sum="Total Credit"/>
+                <field name="balance" sum="Total Balance"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_partner_ledger_display_tree" model="ir.ui.view">
+        <field name="name">custom.partner.ledger.display.list</field>
+        <field name="model">custom.report.display.line</field>
+        <field name="arch" type="xml">
+            <list string="Partner Ledger" create="0" edit="0" delete="0">
+                <field name="partner" string="Partner Group"/>
+                <field name="date"/>
+                <field name="ref"/>
+                <field name="account"/>
+                <field name="debit" sum="Total Debit"/>
+                <field name="credit" sum="Total Credit"/>
+                <field name="balance"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_general_ledger_display_tree" model="ir.ui.view">
+        <field name="name">custom.general.ledger.display.list</field>
+        <field name="model">custom.report.display.line</field>
+        <field name="arch" type="xml">
+            <list string="General Ledger" create="0" edit="0" delete="0">
+                <field name="account" string="Account Group"/>
+                <field name="date"/>
+                <field name="ref"/>
+                <field name="partner"/>
+                <field name="debit" sum="Total Debit"/>
+                <field name="credit" sum="Total Credit"/>
+                <field name="balance"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_cash_book_display_tree" model="ir.ui.view">
+        <field name="name">custom.cash.book.display.list</field>
+        <field name="model">custom.report.display.line</field>
+        <field name="arch" type="xml">
+            <list string="Cash Book" create="0" edit="0" delete="0">
+                <field name="date"/>
+                <field name="journal"/>
+                <field name="ref"/>
+                <field name="account"/>
+                <field name="debit" sum="Total Debit"/>
+                <field name="credit" sum="Total Credit"/>
+                <field name="balance"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_tax_report_display_tree" model="ir.ui.view">
+        <field name="name">custom.tax.report.display.list</field>
+        <field name="model">custom.report.display.line</field>
+        <field name="arch" type="xml">
+            <list string="Tax Report" create="0" edit="0" delete="0">
+                <field name="tax_name"/>
+                <field name="balance" string="Tax Amount" sum="Total Tax"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_gstr2b_reconciliation_display_tree" model="ir.ui.view">
+        <field name="name">custom.gstr2b.reconciliation.display.list</field>
+        <field name="model">custom.report.display.line</field>
+        <field name="arch" type="xml">
+            <list string="GSTR-2B Reconciliation" create="0" edit="0" delete="0">
+                <field name="name" string="Particulars"/>
+                <field name="voucher_count" string="Voucher Count" sum="Total"/>
+                <field name="taxable_amount" string="Taxable Amount" sum="Total"/>
+                <field name="igst" string="IGST" sum="Total"/>
+                <field name="cgst" string="CGST" sum="Total"/>
+                <field name="sgst" string="SGST" sum="Total"/>
+                <field name="cess" string="Cess" sum="Total"/>
+                <field name="tax_amount" string="Tax Amount" sum="Total"/>
+                <field name="invoice_status_amount" string="Invoice Status Amount"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_gstr2a_reconciliation_display_tree" model="ir.ui.view">
+        <field name="name">custom.gstr2a.reconciliation.display.list</field>
+        <field name="model">custom.report.display.line</field>
+        <field name="arch" type="xml">
+            <list string="GSTR-2A Reconciliation" create="0" edit="0" delete="0">
+                <field name="name" string="Particulars"/>
+                <field name="voucher_count" string="Voucher Count" sum="Total"/>
+                <field name="taxable_amount" string="Taxable Amount" sum="Total"/>
+                <field name="igst" string="IGST" sum="Total"/>
+                <field name="cgst" string="CGST" sum="Total"/>
+                <field name="sgst" string="SGST" sum="Total"/>
+                <field name="cess" string="Cess" sum="Total"/>
+                <field name="tax_amount" string="Tax Amount" sum="Total"/>
+                <field name="invoice_status_amount" string="Invoice Status Amount"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_annual_computation_display_tree" model="ir.ui.view">
+        <field name="name">custom.annual.computation.display.list</field>
+        <field name="model">custom.report.display.line</field>
+        <field name="arch" type="xml">
+            <list string="Annual Computation" create="0" edit="0" delete="0">
+                <field name="name" string="Particulars"/>
+                <field name="voucher_count" string="Voucher Count" sum="Total"/>
+                <field name="taxable_amount" string="Taxable Amount" sum="Total"/>
+                <field name="igst" string="IGST" sum="Total"/>
+                <field name="cgst" string="CGST" sum="Total"/>
+                <field name="sgst" string="SGST" sum="Total"/>
+                <field name="cess" string="Cess" sum="Total"/>
+                <field name="tax_amount" string="Tax Amount" sum="Total"/>
+                <field name="invoice_status_amount" string="Invoice Status Amount"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Generic Action -->
+    <record id="action_custom_report_wizard" model="ir.actions.act_window">
+        <field name="name">Accounting Report</field>
+        <field name="res_model">custom.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

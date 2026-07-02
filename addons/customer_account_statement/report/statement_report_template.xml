@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_partner_statement">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <!-- Header -->
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <h2>Account Statement</h2>
+                                <h4 t-field="doc.name"/>
+                                <div t-if="doc.street"><span t-field="doc.street"/></div>
+                                <div t-if="doc.street2"><span t-field="doc.street2"/></div>
+                                <div>
+                                    <span t-if="doc.city" t-field="doc.city"/>
+                                    <span t-if="doc.state_id"> - <span t-field="doc.state_id.name"/></span>
+                                </div>
+                                <div t-if="doc.zip"><span t-field="doc.zip"/></div>
+                                <div t-if="doc.country_id"><span t-field="doc.country_id.name"/></div>
+                                <div t-if="doc.vat"><strong>GST No: </strong><span t-field="doc.vat"/></div>
+                            </div>
+                            <div class="col-6 text-end">
+                                <p><strong>Period: </strong><span t-field="doc.statement_date_from"/> to <span t-field="doc.statement_date_to"/></p>
+                                <p><strong>Date Generated: </strong><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/></p>
+                            </div>
+                        </div>
+
+                        <!-- Balance Due Box -->
+                        <div class="row mb-3">
+                            <div class="col-12 text-end">
+                                <div style="display: inline-block; border: 2px solid #875A7B; padding: 10px 20px; border-radius: 5px;">
+                                    <strong style="font-size: 14px;">Balance Due: </strong>
+                                    <span style="font-size: 18px; font-weight: bold; color: #875A7B;"
+                                          t-esc="'₹ {:,.2f}'.format(doc.statement_balance_due)"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Statement Table -->
+                        <table class="table table-sm table-bordered" style="font-size: 12px;">
+                            <thead style="background-color: #875A7B; color: white;">
+                                <tr>
+                                    <th style="width: 12%;">Date</th>
+                                    <th style="width: 15%;">Transactions</th>
+                                    <th style="width: 33%;">Details</th>
+                                    <th class="text-end" style="width: 13%;">Amount</th>
+                                    <th class="text-end" style="width: 13%;">Payments</th>
+                                    <th class="text-end" style="width: 14%;">Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.statement_line_ids" t-as="line">
+                                    <tr t-attf-style="#{line.transaction_type == 'opening_balance' and 'background-color: #f0f0f0; font-weight: bold;' or ''}">
+                                        <td><span t-field="line.date" t-options="{'format': 'dd/MM/yyyy'}"/></td>
+                                        <td>
+                                            <t t-if="line.transaction_type == 'opening_balance'">***Opening Balance***</t>
+                                            <t t-elif="line.transaction_type == 'invoice'">Invoice</t>
+                                            <t t-elif="line.transaction_type == 'payment'">Payment Received</t>
+                                            <t t-elif="line.transaction_type == 'credit_note'">Credit Note</t>
+                                            <t t-elif="line.transaction_type == 'debit_note'">Debit Note</t>
+                                            <t t-elif="line.transaction_type == 'vendor_bill'">Vendor Bill</t>
+                                            <t t-elif="line.transaction_type == 'vendor_payment'">Payment Made</t>
+                                            <t t-elif="line.transaction_type == 'vendor_credit'">Vendor Credit Note</t>
+                                        </td>
+                                        <td><span t-field="line.details"/></td>
+                                        <td class="text-end"><span t-if="line.amount" t-esc="'₹ {:,.2f}'.format(line.amount)"/></td>
+                                        <td class="text-end"><span t-if="line.payment_amount" t-esc="'₹ {:,.2f}'.format(line.payment_amount)"/></td>
+                                        <td class="text-end" style="font-weight: bold;"><span t-esc="'₹ {:,.2f}'.format(line.balance)"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                            <tfoot>
+                                <tr style="background-color: #f8f9fa; font-weight: bold; border-top: 2px solid #875A7B;">
+                                    <td colspan="3" class="text-end"><strong>Balance Due</strong></td>
+                                    <td colspan="3" class="text-end"><strong t-esc="'₹ {:,.2f}'.format(doc.statement_balance_due)"/></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

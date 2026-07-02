@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_gstr1_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h2 t-field="o.company_id.name"/>
+                            <div t-field="o.company_id.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                        </div>
+                    </div>
+                    <div class="row mt32">
+                        <div class="col-12">
+                            <h3>GSTR-1</h3>
+                            <p>Period: <span t-field="o.date_from"/> to <span t-field="o.date_to"/></p>
+                            <p>GST Registration: <span t-field="o.company_id.vat"/></p>
+                            <p>Status: Not Filed</p>
+                        </div>
+                    </div>
+
+                    <h4 class="mt32">Voucher Statistics</h4>
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Particulars</th>
+                                <th class="text-right">Voucher Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Total Vouchers</td>
+                                <td class="text-right"><span t-field="o.total_vouchers"/></td>
+                            </tr>
+                            <tr>
+                                <td>Included in Return</td>
+                                <td class="text-right"><span t-field="o.included_vouchers"/></td>
+                            </tr>
+                            <tr>
+                                <td>Not Relevant for This Return</td>
+                                <td class="text-right"><span t-field="o.excluded_vouchers"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="mt32">Return View</h4>
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Particulars</th>
+                                <th class="text-right">Vch Count</th>
+                                <th class="text-right">Taxable Amount</th>
+                                <th class="text-right">IGST</th>
+                                <th class="text-right">CGST</th>
+                                <th class="text-right">SGST/UTGST</th>
+                                <th class="text-right">Cess</th>
+                                <th class="text-right">Tax Amount</th>
+                                <th class="text-right">Invoice Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.line_ids" t-as="line">
+                                <tr>
+                                    <td><span t-field="line.particulars"/></td>
+                                    <td class="text-right"><span t-field="line.vch_count"/></td>
+                                    <td class="text-right"><span t-field="line.taxable_amount" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                                    <td class="text-right"><span t-field="line.igst" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                                    <td class="text-right"><span t-field="line.cgst" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                                    <td class="text-right"><span t-field="line.sgst" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                                    <td class="text-right"><span t-field="line.cess" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                                    <td class="text-right"><span t-field="line.tax_amount" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                                    <td class="text-right"><span t-field="line.invoice_amount" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_gstr1" model="ir.actions.report">
+        <field name="name">GSTR-1 Report</field>
+        <field name="model">l10n_in.gst.report.wizard</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">l10n_in_gst_reports_custom.report_gstr1_template</field>
+        <field name="report_file">l10n_in_gst_reports_custom.report_gstr1_template</field>
+        <field name="binding_model_id" ref="model_l10n_in_gst_report_wizard"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

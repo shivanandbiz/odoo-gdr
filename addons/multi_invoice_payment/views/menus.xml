@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Bulk Payment wizard menu under Customers -->
+    <menuitem id="menu_multi_invoice_payment"
+              name="Bulk Payment"
+              parent="account.menu_finance_receivables"
+              action="action_multi_invoice_payment"
+              sequence="20"/>
+
+    <!-- Bulk Payment History for Customers -->
+    <record id="action_multi_payment_history_customer" model="ir.actions.act_window">
+        <field name="name">Bulk Payment History</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('partner_type', '=', 'customer'), ('payment_type', '=', 'inbound')]</field>
+        <field name="context">{'default_partner_type': 'customer', 'default_payment_type': 'inbound'}</field>
+    </record>
+
+    <menuitem id="menu_multi_payment_history_customer"
+              name="Bulk Payment History"
+              parent="account.menu_finance_receivables"
+              action="action_multi_payment_history_customer"
+              sequence="21"/>
+</odoo>

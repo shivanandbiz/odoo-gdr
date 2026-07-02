@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custom_accounting_report,custom_accounting_report,model_custom_accounting_report,base.group_user,1,1,1,1
+access_custom_report_wizard,custom_report_wizard,model_custom_report_wizard,base.group_user,1,1,1,1
+access_custom_report_display_line,custom_report_display_line,model_custom_report_display_line,base.group_user,1,1,1,1

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Statement Line Tree View -->
+    <record id="view_account_partner_statement_line_tree" model="ir.ui.view">
+        <field name="name">account.partner.statement.line.tree</field>
+        <field name="model">account.partner.statement.line</field>
+        <field name="arch" type="xml">
+            <list string="Account Statement" create="false" edit="false" delete="false"
+                  decoration-info="transaction_type == 'opening_balance'"
+                  decoration-success="transaction_type in ('payment', 'vendor_payment')"
+                  decoration-danger="transaction_type in ('credit_note', 'vendor_credit')">
+                <field name="date"/>
+                <field name="voucher_type"/>
+                <field name="voucher_number"/>
+                <field name="details" string="Particulars"/>
+                <field name="amount" string="Debit" sum="Total Debit"/>
+                <field name="payment_amount" string="Credit" sum="Total Credit"/>
+                <field name="balance" string="Balance"/>
+                <button name="action_open_document" type="object" icon="fa-external-link" title="Open Document"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="move_id" column_invisible="1"/>
+                <field name="payment_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Add Statement Tab to Partner Form -->
+    <record id="view_partner_form_statement_tab" model="ir.ui.view">
+        <field name="name">res.partner.form.statement.tab</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+
+            <div name="button_box" position="inside">
+                <field name="supplier_rank" invisible="1"/>
+                <field name="customer_rank" invisible="1"/>
+            </div>
+
+            <xpath expr="//sheet" position="before">
+                <!-- Vendor Transactions dropdown -->
+                <div class="d-flex justify-content-end mb-2 me-2"
+                     invisible="supplier_rank == 0">
+                    <div class="btn-group">
+                        <button class="btn btn-primary dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-plus me-1"/>New Transaction
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li class="dropdown-header fw-bold text-uppercase small text-muted">Purchases</li>
+                            <li><button name="action_new_vendor_bill" type="object" class="dropdown-item"><i class="fa fa-file-text-o me-2"/>Bill</button></li>
+                            <li><button name="action_new_vendor_payment" type="object" class="dropdown-item"><i class="fa fa-money me-2"/>Bill Payment</button></li>
+                            <li><button name="action_new_vendor_credit" type="object" class="dropdown-item"><i class="fa fa-undo me-2"/>Vendor Credit</button></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><button name="action_new_purchase_order" type="object" class="dropdown-item"><i class="fa fa-shopping-cart me-2"/>Purchase Order</button></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><button name="action_new_journal_entry" type="object" class="dropdown-item"><i class="fa fa-book me-2"/>Journal Entry</button></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Customer Transactions dropdown -->
+                <div class="d-flex justify-content-end mb-2 me-2"
+                     invisible="customer_rank == 0 or supplier_rank &gt; 0">
+                    <div class="btn-group">
+                        <button class="btn btn-primary dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-plus me-1"/>New Transaction
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li class="dropdown-header fw-bold text-uppercase small text-muted">Sales</li>
+                            <li><button name="action_new_customer_invoice" type="object" class="dropdown-item"><i class="fa fa-file-text-o me-2"/>Invoice</button></li>
+                            <li><button name="action_new_customer_payment" type="object" class="dropdown-item"><i class="fa fa-money me-2"/>Payment Received</button></li>
+                            <li><button name="action_new_customer_credit" type="object" class="dropdown-item"><i class="fa fa-undo me-2"/>Credit Note</button></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><button name="action_new_journal_entry" type="object" class="dropdown-item"><i class="fa fa-book me-2"/>Journal Entry</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </xpath>
+
+            <!-- Statement Tab -->
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page string="Statement" name="account_statement">
+                    <group>
+                        <group string="Statement Options">
+                            <field name="statement_date_from"/>
+                            <field name="statement_date_to"/>
+                        </group>
+                        <group string="Legacy Opening Balance">
+                            <field name="manual_opening_balance"/>
+                            <field name="manual_opening_balance_date"/>
+                            <field name="manual_opening_balance_move_id" invisible="True"/>
+                        </group>
+                    </group>
+                    <group>
+                        <div class="d-flex gap-2">
+                            <button name="action_generate_statement" string="⟳ Generate Statement" type="object" class="btn-primary"/>
+                            <button name="action_open_statement_wizard" string="⚙ Advanced Options" type="object" class="btn-secondary"/>
+                            <button name="action_print_statement" string="🖨 Print PDF" type="object" class="btn-secondary"/>
+                        </div>
+                    </group>
+                    <separator/>
+                    <group string="Balance Due">
+                        <field name="statement_balance_due" widget="monetary" nolabel="1" class="oe_inline" style="font-size: 1.5em; font-weight: bold;"/>
+                    </group>
+                    <separator/>
+                    <field name="statement_line_ids" widget="one2many" mode="list" readonly="1">
+                        <list create="false" edit="false" delete="false"
+                              decoration-info="transaction_type == 'opening_balance'"
+                              decoration-success="transaction_type in ('payment', 'vendor_payment')"
+                              decoration-danger="transaction_type in ('credit_note', 'vendor_credit')">
+                            <field name="date"/>
+                            <field name="voucher_type"/>
+                            <field name="voucher_number"/>
+                            <field name="details" string="Particulars"/>
+                            <field name="amount" string="Debit" sum="Total Debit"/>
+                            <field name="payment_amount" string="Credit" sum="Total Credit"/>
+                            <field name="balance" string="Balance"/>
+                            <button name="action_open_document" type="object" icon="fa-external-link" title="Open Document"/>
+                            <field name="currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
